@@ -17,6 +17,11 @@
     <quarkus-plugin.version>1.10.5.Final</quarkus-plugin.version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+
+    <!-- Update to the latest version -->
+    <strimzi.oauth.version>0.8.1</strimzi.oauth.version>
+    <!-- Override nimbus-jose-jwt version inherited from quarkus-universe-bom with one expected by strimzi-oauth-client -->
+    <strimzi.oauth.nimbus.version>9.10</strimzi.oauth.nimbus.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -26,6 +31,11 @@
         <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>${strimzi.oauth.nimbus.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -41,6 +51,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.strimzi</groupId>
+      <artifactId>kafka-oauth-client</artifactId>
+      <version>${strimzi.oauth.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

@@ -12,6 +12,8 @@ Start one using:
 docker-compose up -d
 ```
 
+This will also start an instance of Keycloak which is used to authenticate to the Kafka broker using OAuth.
+
 **NOTE:** Stop the broker using `docker-compose down; docker-compose rm`
 
 ## Running the application in dev mode
@@ -27,8 +29,8 @@ You can run your application in dev mode that enables live coding using:
 ```shell script
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"year":2008, "title":"The Dark Knight"}' \
-  http://localhost:8080/
+  --data '{"year":2009, "title":"The Dark Knight"}' \
+  http://localhost:9080/
 ```
 
 ## Packaging and running the application
@@ -60,5 +62,10 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ```
 
 You can then execute your native executable with: `./target/getting-started-kafka-1.0.0-SNAPSHOT-runner`
+
+Or if you're not on Linux, you can execute in the container:
+```shell script
+docker-compose -f docker-compose-native.yaml up
+```
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.

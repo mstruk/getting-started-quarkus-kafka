@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  quarkus:
+    image: registry.access.redhat.com/ubi8/ubi:latest
+    container_name: quarkus
+    ports:
+      - 9080:9080
+
+    volumes:
+      - ./target:/tmp/bin
+
+    command:
+      - /bin/bash
+      - -c
+      - chmod +x /tmp/bin/getting-started-kafka-1.0.0-SNAPSHOT-runner  && /tmp/bin/getting-started-kafka-1.0.0-SNAPSHOT-runner -Dkafka.bootstrap.servers=kafka:9092
+
+    networks:
+      - kafkanet
+
+networks:
+  kafkanet:
+    name: getting-started-quarkus-kafka_default
